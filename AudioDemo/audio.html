@@ -1,0 +1,397 @@
+<!doctype html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8">
+    <title>Backbone tutorial</title>
+
+	
+	<style>
+			*{
+				margin:0;
+				padding:0;
+			}
+			body 
+			{
+				background:whitesmoke;
+			}
+			.custom-select {
+				position: relative;
+				display: block;
+				max-width: 100px;
+				min-width: 180px;
+				margin: 0 auto;
+				border: 2px solid #736F6F;
+			}
+			  select {
+				border: none;
+				outline: none;
+				background: rgba(117, 32, 32, 0);
+				-webkit-appearance: none;
+				-moz-appearance: none;
+				appearance: none;
+				border-radius: 0;
+				margin: 0;
+				display: block;
+				width: 100%;
+				padding: 6px 10px 9px 50px;
+				font-size: 18px;
+			}
+			  
+			 
+			  &:after{
+				position: absolute;
+				right:0; top:0;
+				width: 50px; height:100%;
+				line-height: 38px;
+				content: '\FFEC';
+				text-align: center;
+				z-index:-1;
+				background: #f26f70;
+				color:#fff;
+				font-size: 24px;
+			  }
+			  
+			  .header
+				{
+				  height:60px;
+				  width: 100%;
+				  position: fixed;
+				  top:0;
+				  text-align:center;
+				  text-transform:uppercase;
+				  color: white;
+				  font-size: 18px;
+				  line-height: 60px;
+				  border-bottom: 1px solid gray;
+				  background:#373737;
+				}
+				.ListDiv
+				{
+					width:100%;
+					margin-top:70px;	
+				
+				}				
+					
+				.audioTagDiv
+				{
+					width:100%;
+					text-align:center;
+					margin-top:20px;
+				}
+					
+				.controlsDiv
+				{
+					width:100%;
+					text-align:center;
+					margin-top:20px;
+				}
+				 span{height:40px; width:40px; display:inline-block; position:relative;margin-left:10px;} 
+
+			
+				.demoSpan1{background:#333; border-radius:40px;-webkit-border-radius:40px;-moz-border-radius:40px;}
+
+				.demoSpan1:before{content:''; height:0; width:0; display:block; border:10px transparent solid; border-right-width:0; border-left-color:#fff; position:absolute; top:10px; left:16px;}
+
+
+
+				.demoSpan2{position:relative;}
+
+				.demoSpan2:before{content:''; height:16px; width:12px; display:block; background:#333; position:absolute; top:12px; left:0px;}
+
+				.demoSpan2:after{content:''; height:16px; width:0; display:block; border:10px transparent solid; border-left-width:0; border-right-color:#333; position:absolute; top:2px; left:10px; }
+
+				.demoSpan3{position:absolute; margin-left:-20px;}
+
+				.demoSpan3:before{content:''; height:4px; width:16px; display:block; background:#333; position:absolute; top:18px; left:22px;}
+
+				.demoSpan3:after{content:''; height:16px; width:4px; display:block; background:#333; position:absolute; top:12px; left:28px;}
+				
+								
+				.demoSpan4:before{content:''; height:16px; width:12px; display:block; background:#333; position:absolute; top:12px; left:0px;}
+
+				.demoSpan4:after{content:''; height:16px; width:0; display:block; border:10px transparent solid; border-left-width:0; border-right-color:#333; position:absolute; top:2px; left:10px; }
+
+				.demoSpan5{position:absolute; margin-left:-20px; }
+
+				.demoSpan5:before{content:''; height:4px; width:16px; display:block; background:#333; position:absolute; top:18px; left:22px;}
+	
+				.demoSpan6{background:#333; border-radius:20px;-webkit-border-radius:20px;-moz-border-radius:20px;}
+
+				.demoSpan6:before{content:''; height:16px; width:16px; display:block; background:#fff; position:absolute; top:12px; left:12px;}
+
+				.demoSpan7{background:#333; border-radius:20px;-webkit-border-radius:20px;-moz-border-radius:20px;}
+
+				.demoSpan7:before{content:''; height:0; width:0; display:block; border:10px transparent solid; border-right-width:0; border-left-color:#fff; position:absolute; top:10px; left:12px;}
+
+				.demoSpan7:after{content:''; height:20px; width:4px; display:block; background:#fff; position:absolute; top:10px; left:24px;}
+
+				.demoSpan8{background:#333; border-radius:20px;-webkit-border-radius:20px;-moz-border-radius:20px;}
+
+				.demoSpan8:before{content:''; height:0; width:0; display:block; border:10px transparent solid; border-left-width:0; border-right-color:#fff; position:absolute; top:10px; left:18px;}
+
+				.demoSpan8:after{content:''; height:20px; width:4px; display:block; background:#fff; position:absolute; top:10px; left:12px;}
+
+				.demoSpan9{background:#333; border-radius:20px;-webkit-border-radius:20px;-moz-border-radius:20px;}
+
+				.demoSpan9:before{content:''; height:0; width:0; display:block; border:10px transparent solid; border-right-width:0; border-left-color:#fff; position:absolute; top:10px; left:20px;}
+
+				.demoSpan9:after{content:''; height:20px; width:4px; display:block; background:#fff; position:absolute; top:10px; left:12px;}
+
+				
+				
+				.demoSpan10{height:30px;}
+
+				.demoSpan10:before{content:''; height:0; width:0; display:block; border:15px transparent solid; border-right-width:0; border-left-color:#333; position:absolute; top:0px; right:0px;}
+
+				.demoSpan10:after{content:''; height:10px; width:25px; display:block; background:#333; position:absolute; top:10px; left:0px;}
+
+				
+				.demoSpan11{height:30px;}
+
+				.demoSpan11:before{content:''; height:0; width:0; display:block; border:15px transparent solid; border-left-width:0; border-right-color:#333; position:absolute; top:0px; left:0px;}
+
+				.demoSpan11:after{content:''; height:10px; width:25px; display:block; background:#333; position:absolute; top:10px; right:0px;}
+
+			
+
+				.demoSpan12{background:#333; border-radius:20px;-webkit-border-radius:20px;-moz-border-radius:20px;}
+
+				.demoSpan12:before, .demoSpan12:after{content:''; height:20px; width:4px; display:block; background:#fff; position:absolute; top:10px; left:14px;}
+
+				.demoSpan12:after{left:22px;}
+
+
+			</style>
+	
+	
+</head>
+
+
+<body>
+
+
+
+
+    <div class="header">Please select a song from the list</div>
+	<div class="ListDiv">
+	<label for="styledSelect1" class="custom-select">
+        <select name=mylist id=mylist onChange="playAudio();">
+            <option id="1" value="Example1.mp3">Raasathi
+                <option id="2" value="Example2.mp3">Demo
+                    <option id="3" value="Example3.mp3">TestMusic
+                        <option id="4" value="Example4.mp3">Dog
+                            <option id="5" value="Example5.mp3">frog
+                                <option id="6" value="Example6.mp3">Hydrate
+        </select>
+	</label>
+	</div>
+	
+	
+	<div class="audioTagDiv">
+        <audio id="myaudio" controls>
+            HTML5 audio not supported
+        </audio>
+	</div>
+	<div class="controlsDiv">
+        <span id="play" class="demoSpan1" onClick="playAudio();"></span>
+        <span class="demoSpan2" onClick="document.getElementById('myaudio').volume+=0.1">
+		<span class="demoSpan3"></span></span>
+        <span class="demoSpan4" onClick="document.getElementById('myaudio').volume-=0.1"><span class="demoSpan5"></span></span>
+		<span class="demoSpan6" onClick="AudioStop()"></span>	
+		<span class="demoSpan8" onClick="Previous();"></span>
+		<span class="demoSpan7" onClick="Next();"></span>
+   	    <!--<span class="span" onClick="rewindAudio();"></span>-->
+        <span class="demoSpan9" onClick="forwardAudio();"></span>
+		<span class="demoSpan10" onClick="audioPlaybackRateInc();"> </span>
+		<span class="demoSpan11" onClick="audioPlaybackRateDec();"> </span>
+	</div>
+
+</body>
+
+</html>
+
+<script>
+    var currentFile = ""; //Global variable to track current file
+    function playAudio() {
+        // Check for audio element support.
+        if (window.HTMLAudioElement) {
+            try {
+                var oAudio = document.getElementById('myaudio');
+                var btn = document.getElementById('play');
+                var audioURL = document.getElementById('mylist');
+                //Skip loading if current file hasn't changed.
+                if (audioURL.value !== currentFile) {
+                    oAudio.src = audioURL.value;
+                    currentFile = audioURL.value;
+                }
+
+                // Tests the paused attribute and set state.
+                if (oAudio.paused) {
+                    oAudio.play();
+					btn.className="";
+					btn.className="demoSpan12"
+                    //btn.textContent = "Pause";
+                } else {
+                    oAudio.pause();
+					btn.className="";
+					btn.className="demoSpan1"
+                    //btn.textContent = "Play";
+                }
+            } catch (e) {
+                // Fail silently but show in F12 developer tools console
+                if (window.console && console.error("Error:" + e));
+            }
+        }
+    }
+
+    function rewindAudio() {
+        // Check for audio element support.
+        if (window.HTMLAudioElement) {
+            try {
+                var oAudio = document.getElementById('myaudio');
+                oAudio.currentTime -= 30.0;
+            } catch (e) {
+                // Fail silently but show in F12 developer tools console
+                if (window.console && console.error("Error:" + e));
+            }
+        }
+    }
+
+    // Fast forwards the audio file by 30 seconds.
+    function forwardAudio() {
+
+        // Check for audio element support.
+        if (window.HTMLAudioElement) {
+            try {
+                var oAudio = document.getElementById('myaudio');
+                oAudio.currentTime += 30.0;
+            } catch (e) {
+                // Fail silently but show in F12 developer tools console
+                if (window.console && console.error("Error:" + e));
+            }
+        }
+    }
+
+    function restartAudio() {
+        var btn = document.getElementById('play');
+        // Check for audio element support.
+        if (window.HTMLAudioElement) {
+            try {
+                var oAudio = document.getElementById('myaudio');
+                //oAudio.currentTime = 0;
+                var lb = document.getElementById('mylist');
+                oAudio.src = lb.value;
+                oAudio.play();
+				btn.className="";
+				btn.className="demoSpan1"
+               // btn.textContent = "Pause";
+            } catch (e) {
+                // Fail silently but show in F12 developer tools console
+                if (window.console && console.error("Error:" + e));
+            }
+        }
+    }
+
+    function AudioStop() {
+        var oAudio = document.getElementById('myaudio');
+        var btn = document.getElementById('play');
+       // btn.textContent = "Play";
+        var lb = document.getElementById('mylist');
+        oAudio.src = lb.value;
+        //oAudio.Stop();
+		oAudio.pause();
+		oAudio.currentTime = 0;
+    }
+
+
+    //function to select previous song
+    function Previous() {
+        var oAudio = document.getElementById('myaudio');
+        var btn = document.getElementById('play');
+        var lb = document.getElementById('mylist');
+        var curfile = lb.value;
+        var count = lb.options.length;
+        console.log("again");
+
+        for (i = 0; i < count; i++) {
+            if (curfile == lb.options[i].value) {
+                if (i != 0) { //To check the beginning of the LIST OF FILES
+                    j = i - 1; // points to the previous file id
+                    oAudio.src = lb.options[j].value;
+                    oAudio.play();
+                    lb.options[j].selected = true;
+                    //btn.textContent = "Pause";
+					btn.className="";
+					btn.className="demoSpan12";
+                } else { // If curfile is the first file in the list of files
+                   // btn.textContent = "Play";
+				   btn.className="";
+					btn.className="demoSpan1";
+                    window.alert("This is the first song");
+                }
+
+
+            }
+        }
+    }
+
+
+    // Function to select next song
+    function Next() {
+        var oAudio = document.getElementById('myaudio');
+        var btn = document.getElementById('play');
+        var lb = document.getElementById('mylist');
+        var curfile = lb.value;
+        var count = lb.options.length // To count the number of files
+
+        for (i = 0; i < count; i++) {
+            if (curfile == lb.options[i].value) {
+
+                if (i != count - 1) { //To check the beginning of the LIST OF FILES
+                    j = i + 1; // points to the previous file id
+                    oAudio.src = lb.options[j].value;
+                    oAudio.play();
+                    lb.options[j].selected = true;
+					btn.className="";
+					btn.className="demoSpan12";
+				  // btn.textContent = "Pause";
+                } else { // If curfile is the first file in the list of files
+                    //btn.textContent = "Play";
+                    btn.className="";
+					btn.className="demoSpan1";
+					window.alert("This is the last song");
+                }
+
+
+            }
+        }
+    }
+	
+	function audioPlaybackRateInc()
+	{
+		var aud = document.getElementById("myaudio");
+		var speed= aud.playbackRate;
+
+		//console.log("the audio player rate has been increased",speed);
+		if(speed>=2){
+			console.log("Can not increase speed anymore, sorry",speed);
+		}
+		else{
+			aud.playbackRate=speed+0.1;
+		}	
+	}
+	
+	function audioPlaybackRateDec()
+	{
+		var aud = document.getElementById("myaudio");
+		var speed= aud.playbackRate;
+		
+		if(speed<=0.6){
+			console.log("Can not decrease speed anymore, sorry",speed);
+		}
+		else{
+			aud.playbackRate=speed-0.1;
+		}
+	}
+</script>
